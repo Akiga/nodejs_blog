@@ -1,12 +1,20 @@
-// Get
-class NewsController {
-    index(req, res){
-        res.render('home');
-    }
+const courses = require('../models/courses');
+const Course = require('../models/courses');
+const {mutipleMongooseTobbject} = require('../../util/mongoose')
 
-    search(req, res){
-        res.render('search')
+class SiteController {
+    index(req, res, next) {
+        Course.find({})
+            .then(courses =>{
+                res.render('home',{
+                    courses : mutipleMongooseTobbject(courses)
+                })
+            })
+            .catch(error => next(error))
+    }
+    search(req, res) {
+        res.render('search');
     }
 }
 
-module.exports = new NewsController;
+module.exports = new SiteController();
