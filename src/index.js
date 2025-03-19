@@ -5,17 +5,15 @@ const methodOverride = require('method-override')
 const app = express()
 const port = 3000
 const morgan = require('morgan')
-
 const route = require('./routes')
 const db = require('./config/db')
 
 // Connect db
 db.connect();
+app.use(express.json()); 
 
 
 app.use(express.static(path.join(__dirname, "public")))
-
-
 app.use(express.urlencoded({
   extended: true
 }))

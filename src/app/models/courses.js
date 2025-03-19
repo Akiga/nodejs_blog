@@ -1,6 +1,6 @@
 // Using Node.js `require()`
 const mongoose = require('mongoose');
-slug = require('mongoose-slug-generator');
+slug = require('mongoose-slug-updater');
 const Schema = mongoose.Schema;
 mongoose.plugin(slug);
 

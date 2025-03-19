@@ -23,10 +23,12 @@ class CourseController {
     // [POST] /courses/store
     async store(req, res, next) {
         try {
+
             const course = new Course(req.body);
             await course.save();
-            res.redirect('/'); // Điều hướng về danh sách khóa học
+            res.redirect('/me/stored/courses'); // Điều hướng về danh sách khóa học
         } catch (error) {
+            console.error(error);
             next(error);
         }
     }
@@ -40,7 +42,7 @@ class CourseController {
     }
 
 
-// PUT /courses/:id
+    // PUT /courses/:id
     async update(req, res, next) {
         try {
             await Course.updateOne({ _id: req.params.id }, req.body);
@@ -48,6 +50,14 @@ class CourseController {
         } catch (error) {
             next(error);
         }
+    }
+
+
+    // DELETE /courses/:id
+    detroy(req, res, next){
+        Course.deleteOne({_id: req.params.id})
+            .then(() => res.redirect('back'))
+            .catch(error => next(error));
     }
 }
 
